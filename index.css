@@ -371,6 +371,7 @@ template {
 }
 
 body {
+  background: #f6f3f6;
   font-family: "Inter", system-ui, "Segoe UI", Roboto, Helvetica, Arial,
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
@@ -527,7 +528,22 @@ ul.menu hr {
   margin-right: -6px;
 }
 
-ul.menu button {
+ul.menu a {
+  padding: 6px;
+  border-radius: 8px;
+  outline: none;
+  border: none;
+  display: flex;
+  /* width: 100%; */
+  background: none;
+  margin-bottom: 4px;
+  gap: 8px;
+  text-decoration: none !important;
+  color: #303030;
+  align-items: center;
+}
+
+/* ul.menu button {
   padding: 6px;
   border-radius: 8px;
   outline: none;
@@ -545,26 +561,26 @@ ul.menu button a {
   color: #303030;
   align-items: center;
   width: 100%;
-}
+} */
 
-ul.menu button:hover {
+ul.menu a:hover {
   background: #f1f1f1;
 }
 
-ul.menu button:focus {
+ul.menu a:focus {
   outline: 2px solid #005bd3;
   background: #f1f1f1;
 }
 
-ul.menu button.profile {
+ul.menu a.profile {
   background: #f1f1f1;
   padding: 4px 12px 4px 8px;
 }
-ul.menu button.profile a {
+ul.menu a.profile {
   justify-content: space-between;
 }
 
-ul.menu button.profile a .profile-info {
+ul.menu a.profile .profile-info {
   display: flex;
   gap: 8px;
   align-items: center;
@@ -747,7 +763,7 @@ main {
   border-top-left-radius: 28px;
   border-bottom-left-radius: 28px;
   background: #1a1a1a;
-  width: 20%;
+  width: 0%;
 }
 
 #progress-text {
@@ -769,6 +785,11 @@ main {
   align-items: start;
 }
 
+.setup-item.open {
+  background: #f3f3f3;
+  padding-bottom: 12px;
+}
+
 .setup-item p {
   line-height: 140%;
 }
@@ -777,12 +798,20 @@ main {
   display: flex;
   gap: 8px;
   align-items: start;
+}
+
+.setup-item.open .setup-item .setup-item-header {
   margin-bottom: 16px;
 }
 
 .setup-item-title {
   height: 18px;
   margin-top: 4px;
+  margin-bottom: 0;
+}
+
+.setup-item.open .setup-item-title {
+  font-weight: 600;
   margin-bottom: 16px;
 }
 
@@ -794,6 +823,15 @@ main {
   max-width: 483px;
 }
 
+.setup-item .more-info,
+.setup-item .step-image {
+  display: none;
+}
+.setup-item.open .more-info,
+.setup-item.open .step-image {
+  display: block;
+}
+
 .more-info a {
   text-decoration: none;
   color: #005bd3;
@@ -802,6 +840,7 @@ main {
 .more-info .more-button {
   height: 28px;
   color: #f6f3f6;
+  cursor: pointer;
   padding: 6px 12px;
   font-size: 12px;
   font-style: normal;
@@ -814,6 +853,19 @@ main {
   background: #404040;
   box-shadow: 0px 0px 0px 1.5px #333, 0px 1px 0px 1.5px #333,
     0px 2px 0px 0px #000;
+}
+
+.more-info .more-button:hover {
+  background: #2a2a2a;
+}
+.more-info .more-button:pressed {
+  background: #2b2b2b;
+  box-shadow: 0px 0px 0px 1.5px #333, 0px 3px 0px 0px #000 inset;
+}
+.more-info .more-button:focus {
+  background: #404040;
+  outline: 2px solid #005bd3;
+  outline-offset: 4px;
 }
 
 button.setup-checkbox {
@@ -913,7 +965,12 @@ button.setup-checkbox svg.completed-icon {
     line-height: 140%;
   }
 
-  .step-image {
+  #setup {
+    border-radius: 0;
+  }
+
+  .step-image,
+  .setup-item.open .step-image {
     display: none;
   }
 }
