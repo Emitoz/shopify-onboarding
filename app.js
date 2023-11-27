@@ -3,7 +3,7 @@
   const ITEM_OPEN = "open";
   const ITEM_DONE = "item-done";
 
-  // Header
+  // Header section
   const notificationButton = document.querySelector("#notification-button");
   const profileButton = document.querySelector("#profile-button");
   const notificationMenu = document.querySelector("#notification-menu");
@@ -29,10 +29,67 @@
     }
   }
 
+  const closeMenuWhenBodyIsClicked = (e) => {
+    console.log(e.target.closest(".menu") || e.target.closest(".header-buttons button") ? true : false);
+    if (e.target.closest(".profile-button") || e.target.classList.contains("profile-button")) {
+      toggleProfileMenu();
+      console.log("Profile button");
+    } else if (e.target.closest(".notificaction-button") || e.target.classList.contains("notification-button")) {
+      toggleNotificationMenu();
+      console.log("Notification button");
+    } else if (e.target.closest(".menu")) {
+      return;
+    } else {
+      notificationMenu.classList.remove(ITEM_OPEN);
+      profileMenu.classList.remove(ITEM_OPEN);
+    }
+
+    return;
+
+      // if (
+      //   !e.target.closest(".menu") || !e.target.closest(".header-buttons button")
+      // ) {
+      //   notificationMenu.classList.remove(ITEM_OPEN);
+      //   profileMenu.classList.remove(ITEM_OPEN);
+      // }
+  }
+
+  // document.body.addEventListener("click", (e) => closeMenuWhenBodyIsClicked(e));
+
   notificationButton.addEventListener("click", toggleNotificationMenu);
   profileButton.addEventListener("click", toggleProfileMenu);
 
-  const checkboxItem = document.querySelector(".shopping-checkbox");
+  // Alert section
+  const alertContainer = document.querySelector("#alert-info");
+  const closeAlertButton = document.querySelector("#close-alert");
+
+  closeAlertButton.addEventListener("click", () => alertContainer.classList.add(ITEM_HIDDEN));
+
+
+  // Expand and collapse setup
+  const expandButton = document.querySelector("#expand-button");
+  const collapseButton = document.querySelector("#collapse-button");
+  const collapseSection = document.querySelector("#setup-collapse");
+
+  const toggleCollapse = () => {
+    const sectionHidden = collapseSection.classList.contains(ITEM_HIDDEN);
+
+    if (sectionHidden) {
+      collapseSection.classList.remove(ITEM_HIDDEN);
+      expandButton.classList.add(ITEM_HIDDEN);
+      collapseButton.classList.remove(ITEM_HIDDEN);
+    }  else {
+      collapseSection.classList.add(ITEM_HIDDEN);
+      collapseButton.classList.add(ITEM_HIDDEN);
+      expandButton.classList.remove(ITEM_HIDDEN);
+    }
+  }
+
+  expandButton.addEventListener("click", toggleCollapse);
+  collapseButton.addEventListener("click", toggleCollapse);
+
+
+  const checkboxItem = document.querySelector(".setup-checkbox");
   const incompleteIcon = document.querySelector("svg.incomplete-icon");
   const completedIcon = document.querySelector("svg.completed-icon");
   const loadingSpinner = document.querySelector("svg.loading-spinner");
